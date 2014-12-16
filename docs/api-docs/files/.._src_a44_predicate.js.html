@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>..\src\a44_predicate.js</title>
+    <title>../src/a44_predicate.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.5.1/build/cssgrids/cssgrids-min.css">
 <!-- commenting out until beta goes live	<link rel="stylesheet" href="http://breezejs.com/sites/all/themes/omega/alpha/css/apha-reset.css"> 
 -->    
@@ -201,7 +201,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: ..\src\a44_predicate.js</h1>
+                        <h1 class="file-heading">File: ../src/a44_predicate.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -646,22 +646,22 @@
     var proto = ctor.prototype = new Predicate();
     proto._initialize(&#x27;binaryPredicate&#x27;, {
       &#x27;eq&#x27;: {
-        aliases: [&quot;==&quot;]
+        aliases: [&quot;==&quot;, &quot;equals&quot; ]
       },
       &#x27;ne&#x27;: {
-        aliases: [&quot;!=&quot;, &#x27;~=&#x27;]
+        aliases: [&quot;!=&quot;, &quot;~=&quot;, &quot;notequals&quot; ]
       },
       &#x27;lt&#x27;: {
-        aliases: [&quot;&lt;&quot; ]
+        aliases: [&quot;&lt;&quot;, &quot;lessthan&quot; ]
       },
       &#x27;le&#x27;: {
-        aliases: [&quot;&lt;=&quot; ]
+        aliases: [&quot;&lt;=&quot;, &quot;lessthanorequal&quot; ]
       },
       &#x27;gt&#x27;: {
-        aliases: [&quot;&gt;&quot;]
+        aliases: [&quot;&gt;&quot;, &quot;greaterthan&quot;]
       },
       &#x27;ge&#x27;: {
-        aliases: [&quot;&gt;=&quot; ]
+        aliases: [&quot;&gt;=&quot;, &quot;greaterthanorequal&quot; ]
       },
       &#x27;startswith&#x27;: {
         isFunction: true
@@ -1003,7 +1003,8 @@
     }
 
     if (!__isString(source)) {
-      if (source != null &amp;&amp; __isObject(source) &amp;&amp; (!__isDate(source))) {
+      if (source != null &amp;&amp; __isObject(source) &amp;&amp; !source.toISOString) { 
+        // source is an object but not a Date-like thing such as a JS or MomentJS Date
         if (source.value === undefined) {
           throw new Error(&quot;Unable to resolve an expression for: &quot; + source + &quot; on entityType: &quot; + entityType.name);
         }
